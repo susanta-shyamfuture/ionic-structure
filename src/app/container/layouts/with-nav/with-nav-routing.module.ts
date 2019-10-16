@@ -12,6 +12,7 @@ const routes: Routes = [
     },
     children: [
       { path: '', loadChildren: '../../../views/user-tabs/user-tabs.module#UserTabsPageModule' },
+      { path: 'test', loadChildren: '../../../views/test/test.module#TestPageModule' },
       // { path: 'login', loadChildren: '../../../views/auth/login/login.module#LoginPageModule' },
       // { path: 'signup', loadChildren: '../../../views/auth/signup/signup.module#SignupPageModule' },
     ]

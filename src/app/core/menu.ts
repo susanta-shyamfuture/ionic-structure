@@ -40,6 +40,14 @@ export const menu = [
     }
   },
   {
+    url: 'test',
+    data: {
+      title: 'Test',
+      hasBackButton: false,
+      hasMenuButton: true
+    }
+  },
+  {
     url: 'menu',
     data: {
       title: 'Menu',
