@@ -10,7 +10,12 @@ import { LoginPage } from './login.page';
 const routes: Routes = [
   {
     path: '',
-    component: LoginPage
+    component: LoginPage,
+    data: {
+      title: 'Login',
+      hasBackButton: false,
+      hasMenuButton: false
+    }
   }
 ];
 

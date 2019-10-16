@@ -12,4 +12,8 @@ export class UserTabsPage implements OnInit {
   ngOnInit() {
   }
 
+  logEvent(event) {
+    // console.log(event);
+  }
+
 }

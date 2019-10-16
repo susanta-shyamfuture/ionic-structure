@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./with-nav.page.scss'],
 })
 export class WithNavPage implements OnInit {
-
   constructor() { }
 
   ngOnInit() {

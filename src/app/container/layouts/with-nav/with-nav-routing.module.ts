@@ -11,11 +11,11 @@ const routes: Routes = [
       title: 'Nav layout'
     },
     children: [
-      // { path: '', redirectTo: 'tabs', pathMatch: 'full' },
       { path: '', loadChildren: '../../../views/user-tabs/user-tabs.module#UserTabsPageModule' },
+      // { path: 'login', loadChildren: '../../../views/auth/login/login.module#LoginPageModule' },
+      // { path: 'signup', loadChildren: '../../../views/auth/signup/signup.module#SignupPageModule' },
     ]
   },
-  // { path: 'user-tabs', loadChildren: '../../../views/user-tabs/user-tabs.module#UserTabsPageModule' },
 ];
 
 @NgModule({

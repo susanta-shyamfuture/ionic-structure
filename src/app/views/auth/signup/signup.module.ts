@@ -10,7 +10,12 @@ import { SignupPage } from './signup.page';
 const routes: Routes = [
   {
     path: '',
-    component: SignupPage
+    component: SignupPage,
+    data: {
+      title: 'Register',
+      hasBackButton: false,
+      hasMenuButton: false
+    }
   }
 ];
 
