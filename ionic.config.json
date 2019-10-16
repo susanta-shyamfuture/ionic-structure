@@ -1,0 +1,7 @@
+{
+  "name": "dashkarma-ionic",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
