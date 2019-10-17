@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IonRouterOutlet, Platform, Events } from '@ionic/angular';
 import { Router, ActivatedRoute, UrlTree, UrlSegmentGroup, PRIMARY_OUTLET, UrlSegment, NavigationEnd } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { Location } from '@angular/common';
@@ -17,6 +18,7 @@ export class HeaderComponent implements OnInit {
     private route: ActivatedRoute,
     private titleService: Title,
     private location: Location,
+    private routerOutlet: IonRouterOutlet
   ) {
     router.events.subscribe(val => {
       if (val instanceof NavigationEnd) {
@@ -42,4 +44,12 @@ export class HeaderComponent implements OnInit {
   //     this.currentRouteData = element.data;
   //   }
   // }
+  
+  goBack() {
+    console.log('view', this.routerOutlet);
+    
+    // if (this.routerOutlet && this.routerOutlet.canGoBack()) {
+    this.routerOutlet.pop();
+    // }
+  }
 }

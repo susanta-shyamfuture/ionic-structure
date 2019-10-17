@@ -18,4 +18,11 @@
   <ion-row class="ion-padding">
     p.mr-2*500Home 
   </ion-row>
+  <ion-col>
+    <!-- <ion-button color="light" expand="block">Signup</ion-button> -->
+    <a [routerLink]="['/user/test']">Test</a>
+    <ion-col>
+      <ion-button (click)="gotoTest()" color="light" expand="block">Test</ion-button>
+    </ion-col>
+  </ion-col>
 </ion-content>

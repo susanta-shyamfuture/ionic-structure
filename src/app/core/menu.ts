@@ -43,8 +43,8 @@ export const menu = [
     url: 'test',
     data: {
       title: 'Test',
-      hasBackButton: false,
-      hasMenuButton: true
+      hasBackButton: true,
+      hasMenuButton: false
     }
   },
   {

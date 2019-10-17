@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-notification',
@@ -8,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 export class NotificationPage implements OnInit {
   defaultHref = '';
 
-  constructor() { }
+  constructor(
+    public router: Router
+  ) { }
 
   ngOnInit() {
+  }
+  
+  gotoTest() {
+    this.router.navigateByUrl('/user/test');
   }
 
 }
