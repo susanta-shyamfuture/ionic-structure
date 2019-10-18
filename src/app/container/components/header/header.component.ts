@@ -44,10 +44,8 @@ export class HeaderComponent implements OnInit {
   //     this.currentRouteData = element.data;
   //   }
   // }
-  
   goBack() {
     console.log('view', this.routerOutlet);
-    
     // if (this.routerOutlet && this.routerOutlet.canGoBack()) {
     this.routerOutlet.pop();
     // }

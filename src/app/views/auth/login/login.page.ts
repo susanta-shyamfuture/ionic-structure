@@ -11,7 +11,7 @@ import { UserOptions } from '../../../core/interfaces/user-options';
 })
 export class LoginPage implements OnInit {
 
-  login: UserOptions = { username: '', password: '' };
+  login: UserOptions = { username: 'Susanta', password: 'Admin' };
   submitted = false;
 
   constructor(

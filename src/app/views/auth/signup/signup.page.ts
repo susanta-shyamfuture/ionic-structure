@@ -9,7 +9,7 @@ import { UserOptions } from '../../../core/interfaces/user-options';
   styleUrls: ['./signup.page.scss'],
 })
 export class SignupPage implements OnInit {
-  signup: UserOptions = { username: '', password: '' };
+  signup: UserOptions = { username: 'Susanta', password: '123456' };
   submitted = false;
 
   constructor(

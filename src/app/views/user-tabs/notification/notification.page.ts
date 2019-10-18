@@ -15,7 +15,7 @@ export class NotificationPage implements OnInit {
 
   ngOnInit() {
   }
-  
+
   gotoTest() {
     this.router.navigateByUrl('/user/test');
   }

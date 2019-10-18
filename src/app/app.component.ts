@@ -55,22 +55,22 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     //   navigator['app'].exitApp();
     // });
 
-    this.platform.backButton.subscribeWithPriority(0, () => {
-      if (this.routerOutlet && this.routerOutlet.canGoBack()) {
-        this.routerOutlet.pop();
-      } else if (this.router.url === '/login' || this.router.url === '/user/home') {
+    // this.platform.backButton.subscribeWithPriority(0, () => {
+    //   if (this.routerOutlet && this.routerOutlet.canGoBack()) {
+    //     this.routerOutlet.pop();
+    //   } else if (this.router.url === '/login' || this.router.url === '/user/home') {
 
-        // or if that doesn't work, try
-        console.log('exit');
-        this.presentAlertConfirm();
-        // navigator['app'].exitApp();
-      } else {
-        // this.generic.showAlert("Exit", "Do you want to exit the app?", this.onYesHandler, this.onNoHandler, "backPress");
-        this.presentAlertConfirm();
-        console.log('exit');
-        // navigator['app'].exitApp();
-      }
-    });
+    //     // or if that doesn't work, try
+    //     this.presentAlertConfirm();
+    //     console.log('exit');
+    //     // navigator['app'].exitApp();
+    //   } else {
+    //     // this.generic.showAlert("Exit", "Do you want to exit the app?", this.onYesHandler, this.onNoHandler, "backPress");
+    //     this.presentAlertConfirm();
+    //     console.log('exit');
+    //     // navigator['app'].exitApp();
+    //   }
+    // });
   }
 
   ngOnDestroy() {
@@ -86,28 +86,32 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  async presentAlertConfirm() {
-    const alert = await this.alertController.create({
-      header: 'Exit',
-      message: 'Do you want to exit the app?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
-        }, {
-          text: 'Exit',
-          handler: () => {
-            // navigator['app'].exitApp();
-            console.log('Confirm Okay');
-          }
-        }
-      ]
-    });
+  // async presentAlertConfirm() {
+  //   console.log('presentAlertConfirm');
+  //   const alert = await this.alertController.create({
+  //     header: 'Exit',
+  //     message: 'Do you want to exit the app?',
+  //     buttons: [
+  //       {
+  //         text: 'Cancel',
+  //         role: 'cancel',
+  //         cssClass: 'secondary',
+  //         handler: (blah) => {
+  //           console.log('Confirm Cancel: blah');
+  //         }
+  //       }, {
+  //         text: 'Exit',
+  //         handler: () => {
+  //           // navigator['app'].exitApp();
+  //           console.log('Confirm Okay');
+  //         }
+  //       }
+  //     ]
+  //   });
 
-    await alert.present();
+  //   await alert.present();
+  // }
+  gotoPage(pageName) {
+    this.router.navigateByUrl(pageName);
   }
 }

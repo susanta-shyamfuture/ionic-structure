@@ -7,17 +7,18 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { Storage } from '@ionic/storage';
+import { AlertController } from '@ionic/angular';
 
 // RxJs
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-with-nav',
-  templateUrl: './with-nav.page.html',
-  styleUrls: ['./with-nav.page.scss'],
+  selector: 'app-default',
+  templateUrl: './default.page.html',
+  styleUrls: ['./default.page.scss'],
 })
-export class WithNavPage implements OnInit, AfterViewInit, OnDestroy {
+export class DefaultPage implements OnInit, AfterViewInit, OnDestroy {
   private onDestroyUnSubscribe = new Subject<void>();
   @ViewChild(IonRouterOutlet, { static: false }) routerOutlet: IonRouterOutlet;
   constructor(
@@ -27,6 +28,7 @@ export class WithNavPage implements OnInit, AfterViewInit, OnDestroy {
     private statusBar: StatusBar,
     private router: Router,
     private storage: Storage,
+    public alertController: AlertController
   ) { }
 
   ngOnInit() {
@@ -38,6 +40,7 @@ export class WithNavPage implements OnInit, AfterViewInit, OnDestroy {
     // .subscribe(() => {
     //   navigator['app'].exitApp();
     // });
+
     // this.backbuttonInitializer();
   }
   // ionViewWillEnter() {
@@ -46,6 +49,7 @@ export class WithNavPage implements OnInit, AfterViewInit, OnDestroy {
   ionViewDidEnter() {
     this.backbuttonInitializer();
   }
+
   ionViewWillLeave() {
     // UnSubscribe Subscriptions
     this.onDestroyUnSubscribe.next();
@@ -57,24 +61,50 @@ export class WithNavPage implements OnInit, AfterViewInit, OnDestroy {
   //   this.onDestroyUnSubscribe.complete();
   // }
   private backbuttonInitializer() {
+    console.log('backbuttonInitializer');
     this.platform.backButton
     .pipe(takeUntil(this.onDestroyUnSubscribe))
     .subscribe(() => {
       // this.platform.backButton
-      // .subscribeWithPriority(2, () => {
+      // .subscribeWithPriority(1, () => {
       if (this.routerOutlet && this.routerOutlet.canGoBack()) {
         this.routerOutlet.pop();
       } else if (this.router.url === '/login' || this.router.url === '/user/home') {
         // or if that doesn't work, try
-        console.log('inner exit');
+        this.presentAlertConfirm();
+        console.log('outer exit');
         // navigator['app'].exitApp();
       } else {
         // this.generic.showAlert("Exit", "Do you want to exit the app?", this.onYesHandler, this.onNoHandler, "backPress");
-        console.log('inner exit');
+        this.presentAlertConfirm();
+        console.log('outer exit');
         // navigator['app'].exitApp();
       }
     });
   }
+  async presentAlertConfirm() {
+    console.log('presentAlertConfirm');
+    const alert = await this.alertController.create({
+      header: 'Exit',
+      message: 'Do you want to exit the app?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Exit',
+          handler: () => {
+            // navigator['app'].exitApp();
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
 
-
+    await alert.present();
+  }
 }
