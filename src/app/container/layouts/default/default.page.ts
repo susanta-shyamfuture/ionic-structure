@@ -35,17 +35,8 @@ export class DefaultPage implements OnInit, AfterViewInit, OnDestroy {
     console.log(this.routerOutlet);
   }
   ngAfterViewInit() {
-    // this.platform.backButton
-    // .pipe(takeUntil(this.onDestroyUnSubscribe))
-    // .subscribe(() => {
-    //   navigator['app'].exitApp();
-    // });
-
     // this.backbuttonInitializer();
   }
-  // ionViewWillEnter() {
-  //   this.backbuttonInitializer();
-  // }
   ionViewDidEnter() {
     this.backbuttonInitializer();
   }
@@ -55,18 +46,18 @@ export class DefaultPage implements OnInit, AfterViewInit, OnDestroy {
     this.onDestroyUnSubscribe.next();
     this.onDestroyUnSubscribe.complete();
   }
-  // ngOnDestroy() {
-  //   // UnSubscribe Subscriptions
-  //   this.onDestroyUnSubscribe.next();
-  //   this.onDestroyUnSubscribe.complete();
-  // }
+  ngOnDestroy() {
+    // UnSubscribe Subscriptions
+    this.onDestroyUnSubscribe.next();
+    this.onDestroyUnSubscribe.complete();
+  }
   private backbuttonInitializer() {
     console.log('backbuttonInitializer');
+    // this.platform.backButton
+    // .pipe(takeUntil(this.onDestroyUnSubscribe))
+    // .subscribe(() => {
     this.platform.backButton
-    .pipe(takeUntil(this.onDestroyUnSubscribe))
-    .subscribe(() => {
-      // this.platform.backButton
-      // .subscribeWithPriority(1, () => {
+    .subscribeWithPriority(2, () => {
       if (this.routerOutlet && this.routerOutlet.canGoBack()) {
         this.routerOutlet.pop();
       } else if (this.router.url === '/login' || this.router.url === '/user/home') {

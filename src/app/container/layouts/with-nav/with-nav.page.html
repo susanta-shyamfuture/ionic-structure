@@ -1,6 +1,29 @@
 <!-- <ion-content> -->
   <!-- <p>kkk</p> -->
-<app-header></app-header>
+<!-- <app-header></app-header> -->
+<ion-header contentId="loggedin-content">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <!-- <ion-back-button contentId="loggedin-content" *ngIf="routeData && routeData.data.hasBackButton"></ion-back-button> -->
+      <ion-button *ngIf="(routeData && routeData.data.hasBackButton) && (routerOutlet && routerOutlet.canGoBack())" (click)="goBack()">
+        <ion-icon name="arrow-round-back"></ion-icon>
+      </ion-button>
+      <ion-menu-button *ngIf="routeData && routeData.data.hasMenuButton"></ion-menu-button>
+    </ion-buttons>
+    <ion-title *ngIf="routeData && routeData.data.title">
+      {{routeData.data.title}}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="mail-unread"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon name="notifications"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
   <ion-router-outlet id="loggedin-content"></ion-router-outlet>
 </ion-content>

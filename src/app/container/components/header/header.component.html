@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <!-- <ion-back-button *ngIf="routeData && routeData.data.hasBackButton"></ion-back-button> -->
+      <ion-back-button contentId="loggedin-content" *ngIf="routeData && routeData.data.hasBackButton"></ion-back-button>
       <ion-button (click)="goBack()">Back</ion-button>
       <ion-menu-button *ngIf="routeData && routeData.data.hasMenuButton"></ion-menu-button>
     </ion-buttons>

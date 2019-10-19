@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
 
 import { IonRouterOutlet, Platform, Events } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -11,6 +11,7 @@ import { Storage } from '@ionic/storage';
 // RxJs
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { menu } from '../../../core/menu';
 
 @Component({
   selector: 'app-with-nav',
@@ -19,6 +20,8 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class WithNavPage implements OnInit, AfterViewInit, OnDestroy {
   private onDestroyUnSubscribe = new Subject<void>();
+  currentRouteData: any;
+  routeData: any;
   @ViewChild(IonRouterOutlet, { static: false }) routerOutlet: IonRouterOutlet;
   constructor(
     private events: Events,
@@ -27,22 +30,24 @@ export class WithNavPage implements OnInit, AfterViewInit, OnDestroy {
     private statusBar: StatusBar,
     private router: Router,
     private storage: Storage,
-  ) { }
+  ) {
+    router.events.subscribe(val => {
+      if (val instanceof NavigationEnd) {
+        const splittedUrl = val.urlAfterRedirects.split('/');
+        this.routeData = menu.filter(data => data.url === splittedUrl[(splittedUrl.length - 1)])[0];
+        // route.snapshot.children.forEach(element => {
+        //   this.loadCurrentRouteData(element);
+        // });
+      }
+    });
+  }
 
   ngOnInit() {
     console.log(this.routerOutlet);
   }
   ngAfterViewInit() {
-    // this.platform.backButton
-    // .pipe(takeUntil(this.onDestroyUnSubscribe))
-    // .subscribe(() => {
-    //   navigator['app'].exitApp();
-    // });
     // this.backbuttonInitializer();
   }
-  // ionViewWillEnter() {
-  //   this.backbuttonInitializer();
-  // }
   ionViewDidEnter() {
     this.backbuttonInitializer();
   }
@@ -51,17 +56,17 @@ export class WithNavPage implements OnInit, AfterViewInit, OnDestroy {
     this.onDestroyUnSubscribe.next();
     this.onDestroyUnSubscribe.complete();
   }
-  // ngOnDestroy() {
-  //   // UnSubscribe Subscriptions
-  //   this.onDestroyUnSubscribe.next();
-  //   this.onDestroyUnSubscribe.complete();
-  // }
+  ngOnDestroy() {
+    // UnSubscribe Subscriptions
+    this.onDestroyUnSubscribe.next();
+    this.onDestroyUnSubscribe.complete();
+  }
   private backbuttonInitializer() {
+    // this.platform.backButton
+    // .pipe(takeUntil(this.onDestroyUnSubscribe))
+    // .subscribe(() => {
     this.platform.backButton
-    .pipe(takeUntil(this.onDestroyUnSubscribe))
-    .subscribe(() => {
-      // this.platform.backButton
-      // .subscribeWithPriority(2, () => {
+    .subscribeWithPriority(1, () => {
       if (this.routerOutlet && this.routerOutlet.canGoBack()) {
         this.routerOutlet.pop();
       } else if (this.router.url === '/login' || this.router.url === '/user/home') {
@@ -75,6 +80,11 @@ export class WithNavPage implements OnInit, AfterViewInit, OnDestroy {
       }
     });
   }
-
+  goBack() {
+    console.log('view', this.routerOutlet);
+    // if (this.routerOutlet && this.routerOutlet.canGoBack()) {
+    this.routerOutlet.pop();
+    // }
+  }
 
 }
